@@ -1,10 +1,11 @@
-import { React } from 'react';
+import React from 'react';
 
 class Dashboard extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {};
+	render() {
+		return (
+			<div>Hello dashboard</div>
+		);
 	}
 }
 
-export default { Dashboard };
+export default Dashboard;

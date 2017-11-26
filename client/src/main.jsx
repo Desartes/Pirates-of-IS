@@ -1,14 +1,13 @@
 import React from 'react';
-import { Router, render } from 'react-router';
-import { Dashboard } from './components/Dashboard';
+import ReactDOM from 'react-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
+import Dashboard from './components/Dashboard';
 
-document.addEventListener('DOMContentLoaded', () => {
-	const Main = () => (
-		<Router>
-			<Dashboard path="/" />
-		</Router>
-	);
-
-	render(<Main />, document.getElementById('viewport'));
-});
-
+ReactDOM.render(
+	(
+		<BrowserRouter>
+			<Route path="/" component={Dashboard} />
+		</BrowserRouter>
+	),
+	document.getElementById('react-root'),
+);
