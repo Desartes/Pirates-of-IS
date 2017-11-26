@@ -1,0 +1,7 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Lukáš Letovanec <xletov00>",
+  "license": "MIT"
+}
