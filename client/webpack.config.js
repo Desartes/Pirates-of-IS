@@ -16,12 +16,17 @@ module.exports = {
 			use: [
 				'babel-loader',
 			],
+		}, {
+			test: /\.css$/,
+			use: [
+				'style-loader', 'css-loader',
+			],
 		}],
 	},
 	resolve: {
 		modules: [
 			path.join(__dirname, 'node_modules'),
 		],
-		extensions: ['.jsx', '.js'],
+		extensions: ['.jsx', '.js', '.css', '.png'],
 	},
 };
