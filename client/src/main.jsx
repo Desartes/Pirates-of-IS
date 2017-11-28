@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import Login from './components/Login';
 import WelcomeLabel from './components/WelcomeLabel';
 import Registration from './components/Registration';
+import MainPage from './components/MainPage';
 
 
 const Main = () => (
@@ -11,6 +12,7 @@ const Main = () => (
 		<Switch>
 			<Route exact path="/" component={Login} />
 			<Route path="/registration" component={Registration} />
+			<Route path="/mainpage" component={MainPage} />
 		</Switch>
 	</main>
 );
@@ -21,8 +23,8 @@ const Header = () => (
 	<header>
 		<nav>
 			<ul>
-		  		<li><Link to='/'>Home</Link></li>
-			  	<li><Link to='/registration'>Registrácia</Link></li>
+		  		<li><Link to="/">Home</Link></li>
+			  	<li><Link to="/registration">Registrácia</Link></li>
 			</ul>
 		</nav>
 	</header>
