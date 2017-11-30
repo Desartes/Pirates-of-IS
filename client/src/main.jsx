@@ -5,6 +5,7 @@ import Login from './components/Login';
 import WelcomeLabel from './components/WelcomeLabel';
 import Registration from './components/Registration';
 import MainPage from './components/MainPage';
+import style from './components/styleMain.css';
 
 
 const Main = () => (
@@ -12,29 +13,17 @@ const Main = () => (
 		<Switch>
 			<Route exact path="/" component={Login} />
 			<Route path="/registration" component={Registration} />
-			<Route path="/mainpage" component={MainPage} />
+			<Route exact path="/mainpage" component={MainPage} />
+			<Route exact path="/mainpage/fight" component={MainPage} />
+			<Route exact path="/mainpage/crews" component={MainPage} />
+			<Route exact path="/mainpage/ships" component={MainPage} />
+			<Route exact path="/mainpage/user_details" component={MainPage} />
 		</Switch>
 	</main>
 );
-  
-  // The Header creates links that can be used to navigate
-  // between routes.
-const Header = () => (
-	<header>
-		<nav>
-			<ul>
-		  		<li><Link to="/">Home</Link></li>
-			  	<li><Link to="/registration">Registrácia</Link></li>
-			</ul>
-		</nav>
-	</header>
-);
-
-
 
 const App = () => (
 	<div>
-		<Header />
 		<Main />
 	</div>
 );
@@ -42,7 +31,11 @@ const App = () => (
 ReactDOM.render(
 	(
 		<BrowserRouter>
-			<App />
+			<Switch>
+				<Route exact path="/" component={Login} />
+				<Route path="/registration" component={Registration} />
+				<Route path="/mainpage" component={MainPage} />
+			</Switch>
 		</BrowserRouter>
 	),
 	document.getElementById('react-root'),

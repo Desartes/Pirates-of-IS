@@ -1,0 +1,21 @@
+label {
+    display: block;
+}
+.labely {
+    display: block;
+}
+.form_container {
+    width: 50%;
+    margin: 0 auto;
+}
+input {
+    margin: 0 auto;
+    width: 100%;
+}
+.submit_b {
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 20px;
+
+}

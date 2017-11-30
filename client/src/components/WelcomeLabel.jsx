@@ -3,8 +3,10 @@ import React from 'react';
 class WelcomeLabel extends React.Component {
 	render() {
 		const TextStyle = () => ({
-			color: 'red',
-			fontSize: '50px',
+			fontFamily: 'Berkshire Swash, cursive',
+			color: '#fefefe',
+			textShadow: '2px 2px 5px #999',
+			fontSize: '60px',
 			width: '100%',
 			textAlign: 'center',
 			height: '100px',

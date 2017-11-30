@@ -1,11 +1,12 @@
-#log_in {
+.log_in {
     width: 250px;
     height: 50px;
     outline: none;
     border: 0;
 }
-button:hover {
-    background-color: red;
+
+.log_in:hover {
+    opacity: 0.8;
 }
 
 #home_box {
@@ -13,7 +14,7 @@ button:hover {
     font-size: 18px;
     width: 250px;
     text-align: center;
-    height: 400px;
+    height: 380px;
     position: absolute;
     top: 50%;
     margin-top: -200px;
@@ -23,10 +24,16 @@ button:hover {
     box-shadow: 0px 0px 5px black;
 }
 .inputs {
-    width: 250px;
+    width: 240px;
     outline: none;
     border: 0;
     height: 40px;
+    /*border-bottom: 2px solid #cacaca;*/
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: #fefefe;
+}
+.first_input {
     border-bottom: 2px solid #cacaca;
 }
 #regdiv {
@@ -37,13 +44,15 @@ p {
     font-size: 13px;
     margin-top: 5px;
 }
-#reg {
-    color: black;
-    font-size: 10px;
-    width: 250px;
-    height: 50px;
-    outline: none;
-    border: 0;
-    background-color: #fefefe
-}
 
+#reg_text {
+    color: white;
+    font-family: Berkshire Swash, cursive;
+    font-size: 15px;
+}
+.countdown {
+    padding-top: 15px;
+}
+.c_text {
+    color: teal;
+}

@@ -9,7 +9,9 @@ const app = express();
 const compiler = webpack(webpackConfig);
 
 app.use(express.static(path.join(__dirname, '/www')));
-
+app.get('/api/', function(req, res){
+	res.send('hello world');
+  });
 app.use(webpackDevMiddleware(compiler, {
 	hot: true,
 	filename: 'bundle.js',
