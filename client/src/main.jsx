@@ -38,12 +38,15 @@ const App = () => (
 ReactDOM.render(
 	(
 		<BrowserRouter>
+			<App />
+		</BrowserRouter>
+		/* <BrowserRouter>
 			<Switch>
-				<Route path="http://www.stud.fit.vutbr.cz/~xtavel00/index.html/login/" component={Login} />
+				<Route exact path="/" component={Login} />
 				<Route path="/registration" component={Registration} />
 				<Route path="/mainpage" component={MainPage} />
 			</Switch>
-		</BrowserRouter>
+		</BrowserRouter> */
 
 	),
 	document.getElementById('react-root'),
