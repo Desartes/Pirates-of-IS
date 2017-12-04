@@ -7,6 +7,10 @@
 
 .log_in:hover {
     opacity: 0.8;
+    cursor: pointer;
+}
+form {
+    padding-top: 0px!important;
 }
 
 #home_box {

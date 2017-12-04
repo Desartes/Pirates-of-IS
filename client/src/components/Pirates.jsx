@@ -1,25 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
 
 
-class Crews extends React.Component {
+const picStyle = {
+	backgroundImage: 'url(../images/X.png)',
+	display: 'block',
+	maWidth: '100%',
+	maxHeight: '100%',
+	backgroundSize: 'cover',
+};
+
+class Pirates extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			crews: [],
+			pirates: [],
 			index: 5,
 			numOfRendering: 5,
 			searching: '',
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
-		this.nextCrews = this.nextCrews.bind(this);
-		this.prevCrews = this.prevCrews.bind(this);
+		this.nextPirates = this.nextPirates.bind(this);
+		this.prevPirates = this.prevPirates.bind(this);
 	}
 	componentWillMount() {
 		// http://www.stud.fit.vutbr.cz/~xtavel00/db_control/modify/TABULKA/'
-		const url = 'http://www.stud.fit.vutbr.cz/~xtavel00/db_control/get_table/posadka';
+		const url = 'http://www.stud.fit.vutbr.cz/~xtavel00/db_control/get_table/pirat';
 		this.tryFetching(url);
 	}
 	handleChange(event) {
@@ -31,9 +38,9 @@ class Crews extends React.Component {
 		//alert('Something is searching: ' + this.state.searching);
 		let url;
 		if (strSearching.length === 0) {
-			url = 'http://www.stud.fit.vutbr.cz/~xtavel00/db_control/get_table/posadka';
+			url = 'http://www.stud.fit.vutbr.cz/~xtavel00/db_control/get_table/pirat';
 		} else {
-			url = 'http://www.stud.fit.vutbr.cz/~xtavel00/db_control/search/POSADKA/' + strSearching;
+			url = 'http://www.stud.fit.vutbr.cz/~xtavel00/db_control/search/PIRAT/' + strSearching;
 		}
 		this.tryFetching(url);
 		event.preventDefault();
@@ -42,17 +49,17 @@ class Crews extends React.Component {
 		fetch(url)
 			.then(response => response.json())
 			.then((res) => {
-				this.setState({ crews: res, index: 5 });
+				this.setState({ pirates: res, index: 5 });
 			})
 			.catch(error => console.error(error));
 	}
-	nextCrews() {
+	nextPirates() {
 		console.log(this.state.index);
-		if (this.state.index < this.state.crews.length) {
+		if (this.state.index < this.state.pirates.length) {
 			this.setState({ index: this.state.index + this.state.numOfRendering });
 		}
 	}
-	prevCrews() {
+	prevPirates() {
 		console.log(this.state.index);
 		console.log(this.state.index - this.state.numOfRendering);
 		if (this.state.index > this.state.numOfRendering) {
@@ -61,26 +68,26 @@ class Crews extends React.Component {
 	}
 
 	renderRows() {
-		if (this.state.crews.length === 0) {
+		if (this.state.pirates.length === 0) {
 			return;
 		}
-		const crewsToRender = this.state.crews.slice(this.state.index - this.state.numOfRendering, this.state.index);
-		const crews = crewsToRender.map((crew) => {
-			return (this.renderRow(crew));
+		const piratesToRender = this.state.pirates.slice(this.state.index - this.state.numOfRendering, this.state.index);
+		const pirates = piratesToRender.map((pirate) => {
+			return (this.renderRow(pirate));
 		});
-		return crews;
+		return pirates;
 	}
 
-	renderRow(crew) {
+	renderRow(pirate) {
 		console.log('render row');
 		return (
-			<tr className="riadok" key={crew.MENO}>
-				<td>{crew.MENO}</td>
-				<td>{crew.VLAJKA}</td>
-				<td>{crew.KAPITAN}</td>
-				<td>{crew.SUCASTOU_ALIANCIE}</td>
+			<tr className="riadok" key={pirate.MENO}>
+				<td>{pirate.MENO}</td>
+				<td>{pirate.PREZIVKA}</td>
+				<td>{pirate.VEK}</td>
+				<td>{pirate.POZICIA}</td>
 				<td>
-					<button className="table_button_top">Upraviť</button>
+					<button className="table_button_top">Verbovať</button>
 					<button className="table_button">Detaily</button>
 				</td>
 			</tr>
@@ -88,18 +95,18 @@ class Crews extends React.Component {
 	}
 
 	render() {
-		console.log('som v crews');
+		console.log('som v pirates');
 		return (
 			<div className="content">
-				<div className="search_info">Vyhľadať posádku</div>
+				<div className="search_info">Vyhľadať piráta</div>
 				<SearchBar fetching={this.handleSubmit} searching={this.handleChange} />
 				<table className="w3-table w3-striped w3-bordered tabulka">
 					<thead>
 						<tr>
 							<th>Meno</th>
-							<th>Vlajka</th>
-							<th>Kapitán</th>
-							<th>Súčasťou aliancie</th>
+							<th>Prezívka</th>
+							<th>Vek</th>
+							<th>Pozícia</th>
 						</tr>
 					</thead>
 					<tbody className="tabulka_telo">
@@ -108,15 +115,12 @@ class Crews extends React.Component {
 				</table>
 				<div className="next_prev">
 					<div className="next_prev_div">
-						<button className="next_prev_buttons" onClick={this.prevCrews}>Predchodzí</button>
-						<button className="next_prev_buttons" onClick={this.nextCrews}>Nasledujúci</button>
+						<button className="next_prev_buttons" onClick={this.prevPirates}>Predchodzí</button>
+						<button className="next_prev_buttons" onClick={this.nextPirates}>Nasledujúci</button>
 					</div>
-					<Link className="add_button" to="/mainpage/add_crew">
-						<button  className="w3-pink">Vytvoriť posádku</button>
-					</Link>
 				</div>
 			</div>
 		);
 	}
 }
-export default Crews;
+export default Pirates;

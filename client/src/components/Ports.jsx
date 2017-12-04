@@ -3,23 +3,23 @@ import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
 
 
-class Ships extends React.Component {
+class Ports extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			ships: [],
+			ports: [],
 			index: 5,
 			numOfRendering: 5,
 			searching: '',
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
-		this.nextShips = this.nextShips.bind(this);
-		this.prevShips = this.prevShips.bind(this);
+		this.nextPorts = this.nextPorts.bind(this);
+		this.prevPorts = this.prevPorts.bind(this);
 	}
 
 	componentWillMount() {
-		const url = 'http://www.stud.fit.vutbr.cz/~xtavel00/db_control/get_table/lod';
+		const url = 'http://www.stud.fit.vutbr.cz/~xtavel00/db_control/get_table/pristav';
 		this.tryFetching(url);
 	}
 	handleChange(event) {
@@ -30,9 +30,9 @@ class Ships extends React.Component {
 		const strSearching = this.state.searching.trim();
 		let url;
 		if (strSearching.length === 0) {
-			url = 'http://www.stud.fit.vutbr.cz/~xtavel00/db_control/get_table/lod';
+			url = 'http://www.stud.fit.vutbr.cz/~xtavel00/db_control/get_table/pristav';
 		} else {
-			url = 'http://www.stud.fit.vutbr.cz/~xtavel00/db_control/search/LOD/' + strSearching;
+			url = 'http://www.stud.fit.vutbr.cz/~xtavel00/db_control/search/PRISTAV/' + strSearching;
 		}
 		this.tryFetching(url);
 		event.preventDefault();
@@ -41,58 +41,55 @@ class Ships extends React.Component {
 		fetch(url)
 			.then(response => response.json())
 			.then((res) => {
-				this.setState({ ships: res });
+				this.setState({ ports: res });
 			})
 			.catch(error => console.error(error));
 	}
-	nextShips() {
+	nextPorts() {
 		console.log(this.state.index);
-		if (this.state.index < this.state.ships.length) {
+		if (this.state.index < this.state.ports.length) {
 			this.setState({ index: this.state.index + this.state.numOfRendering });
 		}
 	}
-	prevShips() {
+	prevPorts() {
 		if (this.state.index > this.state.numOfRendering) {
 			this.setState({ index: this.state.index - this.state.numOfRendering });
 		}
 	}
 
 	renderRows() {
-		if (this.state.ships.length === 0) {
+		if (this.state.ports.length === 0) {
 			return;
 		}
-		const shipsToRender = this.state.ships.slice(this.state.index - this.state.numOfRendering, this.state.index);
-		const ships = shipsToRender.map((ship) => {
-			return (this.renderRow(ship));
+		const portsToRender = this.state.ports.slice(this.state.index - this.state.numOfRendering, this.state.index);
+		const ports = portsToRender.map((port) => {
+			return (this.renderRow(port));
 		});
-		return ships;
+		return ports;
 	}
 
-	renderRow(ship) {
+	renderRow(port) {
 		return (
-			<tr className="riadok" key={ship.ID_LOD}>
-				<td>{ship.ID_LOD}</td>
-				<td>{ship.TYP}</td>
-				<td>{ship.KAPACITA}</td>
-				<td>{ship.DIV_KAPITAN}</td>
-				<td>
-					<button className="table_button_top">Detaily</button>
-				</td>
+			<tr className="riadok" key={port.ID_BITKA}>
+				<td>{port.ID_PRIST}</td>
+				<td>{port.KAPACITA}</td>
+				<td>{port.LOKALITA}</td>
+				<td>{port.TEORITORIUM_POSADKY}</td>
 			</tr>
 		);
 	}
 	render() {
 		return (
 			<div className="content">
-				<div className="search_info">Vyhľadať loď</div>
+				<div className="search_info">Vyhľadať prístav</div>
 				<SearchBar fetching={this.handleSubmit} searching={this.handleChange} />
 				<table className="w3-table w3-striped w3-bordered tabulka">
 					<thead>
 						<tr>
-							<th>ID Lode</th>
-							<th>Typ</th>
+							<th>ID Prístavu</th>
 							<th>Kapacita</th>
-							<th>Divízny kapitán</th>
+							<th>Lokalita</th>
+							<th>Teritórium posádky</th>
 						</tr>
 					</thead>
 					<tbody className="tabulka_telo">
@@ -101,15 +98,15 @@ class Ships extends React.Component {
 				</table>
 				<div className="next_prev">
 					<div className="next_prev_div">
-						<button className="next_prev_buttons" onClick={this.prevShips}>Predchodzí</button>
-						<button className="next_prev_buttons" onClick={this.nextShips}>Nasledujúci</button>
+						<button className="next_prev_buttons" onClick={this.prevPorts}>Predchodzí</button>
+						<button className="next_prev_buttons" onClick={this.nextPorts}>Nasledujúci</button>
 					</div>
-					<Link className="add_button" to="/mainpage/add_ship">
-						<button  className="w3-pink">Pridať loď</button>
+					<Link className="add_button" to="/mainpage/add_port">
+						<button  className="w3-pink">Pridať prístav</button>
 					</Link>
 				</div>
 			</div>
 		);
 	}
 }
-export default Ships;
+export default Ports;

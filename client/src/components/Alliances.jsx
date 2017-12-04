@@ -3,23 +3,23 @@ import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
 
 
-class Ships extends React.Component {
+class Alliances extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			ships: [],
+			alliances: [],
 			index: 5,
 			numOfRendering: 5,
 			searching: '',
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
-		this.nextShips = this.nextShips.bind(this);
-		this.prevShips = this.prevShips.bind(this);
+		this.nextAlliances = this.nextAlliances.bind(this);
+		this.prevAlliances = this.prevAlliances.bind(this);
 	}
 
 	componentWillMount() {
-		const url = 'http://www.stud.fit.vutbr.cz/~xtavel00/db_control/get_table/lod';
+		const url = 'http://www.stud.fit.vutbr.cz/~xtavel00/db_control/get_table/aliancia';
 		this.tryFetching(url);
 	}
 	handleChange(event) {
@@ -30,9 +30,9 @@ class Ships extends React.Component {
 		const strSearching = this.state.searching.trim();
 		let url;
 		if (strSearching.length === 0) {
-			url = 'http://www.stud.fit.vutbr.cz/~xtavel00/db_control/get_table/lod';
+			url = 'http://www.stud.fit.vutbr.cz/~xtavel00/db_control/get_table/aliancia';
 		} else {
-			url = 'http://www.stud.fit.vutbr.cz/~xtavel00/db_control/search/LOD/' + strSearching;
+			url = 'http://www.stud.fit.vutbr.cz/~xtavel00/db_control/search/ALIANCIA/' + strSearching;
 		}
 		this.tryFetching(url);
 		event.preventDefault();
@@ -41,58 +41,53 @@ class Ships extends React.Component {
 		fetch(url)
 			.then(response => response.json())
 			.then((res) => {
-				this.setState({ ships: res });
+				this.setState({ alliances: res });
 			})
 			.catch(error => console.error(error));
 	}
-	nextShips() {
+	nextAlliances() {
 		console.log(this.state.index);
-		if (this.state.index < this.state.ships.length) {
+		if (this.state.index < this.state.alliances.length) {
 			this.setState({ index: this.state.index + this.state.numOfRendering });
 		}
 	}
-	prevShips() {
+	prevAlliances() {
 		if (this.state.index > this.state.numOfRendering) {
 			this.setState({ index: this.state.index - this.state.numOfRendering });
 		}
 	}
 
 	renderRows() {
-		if (this.state.ships.length === 0) {
+		if (this.state.alliances.length === 0) {
 			return;
 		}
-		const shipsToRender = this.state.ships.slice(this.state.index - this.state.numOfRendering, this.state.index);
-		const ships = shipsToRender.map((ship) => {
-			return (this.renderRow(ship));
+		const alliancesToRender = this.state.alliances.slice(this.state.index - this.state.numOfRendering, this.state.index);
+		const alliances = alliancesToRender.map((alliance) => {
+			return (this.renderRow(alliance));
 		});
-		return ships;
+		return alliances;
 	}
 
-	renderRow(ship) {
+	renderRow(alliance) {
 		return (
-			<tr className="riadok" key={ship.ID_LOD}>
-				<td>{ship.ID_LOD}</td>
-				<td>{ship.TYP}</td>
-				<td>{ship.KAPACITA}</td>
-				<td>{ship.DIV_KAPITAN}</td>
-				<td>
-					<button className="table_button_top">Detaily</button>
-				</td>
+			<tr className="riadok" key={alliance.ID_ALIANCIA}>
+                <td>{alliance.ID_ALIANCIA}</td>
+				<td>{alliance.NAZOV}</td>
+				<td>{alliance.PRISTAV}</td>
 			</tr>
 		);
 	}
 	render() {
 		return (
 			<div className="content">
-				<div className="search_info">Vyhľadať loď</div>
+				<div className="search_info">Vyhľadať alianciu</div>
 				<SearchBar fetching={this.handleSubmit} searching={this.handleChange} />
 				<table className="w3-table w3-striped w3-bordered tabulka">
 					<thead>
 						<tr>
-							<th>ID Lode</th>
-							<th>Typ</th>
-							<th>Kapacita</th>
-							<th>Divízny kapitán</th>
+							<th>ID Aliancie</th>
+							<th>Názov</th>
+                            <th>Domovský prístav</th>
 						</tr>
 					</thead>
 					<tbody className="tabulka_telo">
@@ -101,15 +96,15 @@ class Ships extends React.Component {
 				</table>
 				<div className="next_prev">
 					<div className="next_prev_div">
-						<button className="next_prev_buttons" onClick={this.prevShips}>Predchodzí</button>
-						<button className="next_prev_buttons" onClick={this.nextShips}>Nasledujúci</button>
+						<button className="next_prev_buttons" onClick={this.prevAlliances}>Predchodzí</button>
+						<button className="next_prev_buttons" onClick={this.nextAlliances}>Nasledujúci</button>
 					</div>
-					<Link className="add_button" to="/mainpage/add_ship">
-						<button  className="w3-pink">Pridať loď</button>
+					<Link className="add_button" to="/mainpage/add_alliance">
+						<button  className="w3-pink">Vytvoriť alianciu</button>
 					</Link>
 				</div>
 			</div>
 		);
 	}
 }
-export default Ships;
+export default Alliances;

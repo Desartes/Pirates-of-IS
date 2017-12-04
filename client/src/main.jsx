@@ -13,11 +13,18 @@ const Main = () => (
 		<Switch>
 			<Route exact path="/" component={Login} />
 			<Route path="/registration" component={Registration} />
-			<Route exact path="/mainpage" component={MainPage} />
-			<Route exact path="/mainpage/fight" component={MainPage} />
-			<Route exact path="/mainpage/crews" component={MainPage} />
-			<Route exact path="/mainpage/ships" component={MainPage} />
-			<Route exact path="/mainpage/user_details" component={MainPage} />
+			<Route path="/mainpage" component={MainPage} />
+			<Route path="/mainpage/fight" component={MainPage} />
+			<Route path="/mainpage/crews" component={MainPage} />
+			<Route path="/mainpage/ships" component={MainPage} />
+			<Route path="/mainpage/pirates" component={MainPage} />
+			<Route path="/mainpage/user_details" component={MainPage} />
+			<Route path="/mainpage/add_crew" component={MainPage} />
+			<Route path="/mainpage/add_fight" component={MainPage} />
+			<Route path="/mainpage/add_fleet" component={MainPage} />
+			<Route path="/mainpage/add_port" component={MainPage} />
+			<Route path="/mainpage/add_ship" component={MainPage} />
+			<Route path="/mainpage/add_alliance" component={MainPage} />
 		</Switch>
 	</main>
 );
@@ -32,11 +39,12 @@ ReactDOM.render(
 	(
 		<BrowserRouter>
 			<Switch>
-				<Route exact path="/" component={Login} />
+				<Route path="http://www.stud.fit.vutbr.cz/~xtavel00/index.html/login/" component={Login} />
 				<Route path="/registration" component={Registration} />
 				<Route path="/mainpage" component={MainPage} />
 			</Switch>
 		</BrowserRouter>
+
 	),
 	document.getElementById('react-root'),
 );

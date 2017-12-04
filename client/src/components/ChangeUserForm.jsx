@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './styleForm.css';
 
-class Form extends React.Component {
+class ChangeUserForm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -27,7 +27,35 @@ class Form extends React.Component {
 		alert('A name was submitted: ' + this.state.name);
 		event.preventDefault();
 	}
-	renderForm() {
+	whatToRender() {
+		if(this.props.whatForm === 'user_details')
+			return this.renderChangeUserDetails();
+		if(this.props.whatForm === 'add_crew')
+			return this.renderAddCrew();
+	}
+	renderAddCrew() {
+		return(
+			<div className="form_container">
+				<label>
+					<div className="labely">Meno:</div>
+					<input name="name" type="text" value={this.state.pirate.name} onChange={this.handleChange} />
+				</label>
+				<label>
+					<div className="labely">Prezívka:</div>
+					<input name="nick" type="text" value={this.state.pirate.nick} onChange={this.handleChange} />
+				</label>
+				<label>
+					<div className="labely">Pozícia:</div>
+					<input name="position" type="text" value={this.state.pirate.position} onChange={this.handleChange} />
+				</label>
+				<label>
+					<div className="labely">Vek:</div>
+					<input name="age" type="text" value={this.state.age} onChange={this.handleChange} />
+				</label>
+		</div>
+		);
+	}
+	renderChangeUserDetails() {
 		return (
 			<div className="form_container">
 				<label>
@@ -65,7 +93,7 @@ class Form extends React.Component {
 	render() {
 		return (
 			<form onSubmit={this.handleSubmit}>
-				{this.renderForm()}
+				{this.renderChangeUserDetails()}
 				<div className="form_container">
 					<input className="submit_b" type="submit" value="Submit" />
 				</div>
@@ -73,4 +101,4 @@ class Form extends React.Component {
 		);
 	}
 }
-export default Form;
+export default ChangeUserForm;

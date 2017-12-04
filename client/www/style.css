@@ -4,6 +4,7 @@
 }
 
 body {
+    overflow: hidden;
     background-image: url('./images/background2.jpg');
     background-size: cover;
     height: 100%;
